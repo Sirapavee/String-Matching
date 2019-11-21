@@ -1,0 +1,4 @@
+x y z
+6 26
+x z y z x x
+x y y z x z y z x x z y y x x z y z x z y z x x y y
