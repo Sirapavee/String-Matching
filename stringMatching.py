@@ -1,5 +1,5 @@
 #-----------------init-------------------
-file = open('test2.txt', 'r')
+file = open('9.8.txt', 'r')
 fromText = []
 
 for line in file:
@@ -20,10 +20,10 @@ class naïve:
         count = 0
         for i in range(len(self.text)-len(self.pattern)):
             for j in range(len(self.pattern)):
-                if(text[i+j]!=pattern[j]):
+                if(self.text[i+j]!=self.pattern[j]):
                     count = 0
                     break
-                elif(text[i+j]==pattern[j]):
+                elif(self.text[i+j]==self.pattern[j]):
                     count += 1
                     if(count==len(self.pattern)):
                         print(f'Pattern occur with shift {i+1} from Left to Right')
@@ -33,10 +33,10 @@ class naïve:
         count = 0
         for i in range(len(self.text)-1, len(self.pattern)-2, -1):
             for j in range(len(self.pattern)):
-                if(text[i-j]!=pattern[j]):
+                if(self.text[i-j]!=self.pattern[j]):
                     count = 0
                     break
-                elif(text[i-j]==pattern[j]):
+                elif(self.text[i-j]==self.pattern[j]):
                     count += 1
                     if(count==len(self.pattern)):
                         print(f'Pattern occur with shift {i+1} from Right to Left')
@@ -53,12 +53,12 @@ class KMP:
     def prefixFunc(self):
         k = 0
         for i in range(1, len(self.pattern)):
-            while k > 0 and self.pattern[k+1] != self.pattern[i-1]:
-                k = self.prefTable[k]
-            if(self.pattern[k+1] == self.pattern[i-1]):
+            while k > 0 and self.pattern[k] != self.pattern[i]:
+                k = self.prefTable[k-1]
+            if(self.pattern[k] == self.pattern[i]):
                 k += 1
             self.prefTable[i] = k
-            
+    
     def matcherLR(self):
         q = 0
         for i in range(len(self.text)):
@@ -83,6 +83,7 @@ class KMP:
 
 kmp = KMP(pattern, text)
 kmp.prefixFunc()
+print(kmp.prefTable)
 kmp.matcherLR()
 kmp.matcherRL()
 
