@@ -83,7 +83,6 @@ class KMP:
 
 kmp = KMP(pattern, text)
 kmp.prefixFunc()
-print(kmp.prefTable)
 kmp.matcherLR()
 kmp.matcherRL()
 
